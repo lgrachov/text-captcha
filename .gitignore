@@ -1,0 +1,10 @@
+# Venv and Python cache
+__pycache__/
+venv/
+
+# Ignore the generated captchas
+img_*
+
+# File icon files
+.DS_Store
+Thumbs.db
