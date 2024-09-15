@@ -28,7 +28,7 @@ def generate_image_with_text(text):
         str: The hash value of the image file.
     """
 
-    # To do: add a ratelimit for generation of 1 second
+    # TODO: add a ratelimit for generation of 1 second
     image = Image.new("RGB", (70, 30), color=(255, 255, 255))
 
     draw = ImageDraw.Draw(image)

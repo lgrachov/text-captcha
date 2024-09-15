@@ -108,10 +108,24 @@ def validate_captcha():
             400,
         )
 
-    if db[hash] == text:
-        return jsonify({"valid": True, "text": text})
+    # Check if a captcha with the specified hash exists in the database.
+    if hash in db:
+        if db[hash] == text:
+            # If the captcha is validated, remove it from the database to save space on the server
+            image_file = Path(f"./img_{hash}.png")
+            image_file.unlink()
+            del db[hash]
 
-    return jsonify({"valid": False, "text": text})
+            return jsonify({"valid": True, "text": text})
+
+        return jsonify({"valid": False, "text": text})
+
+    return jsonify(
+        {
+            "error": "Test does not exist",
+            "description": "The test with the specified hash does not exist.",
+        }
+    )
 
 
 if __name__ == "__main__":
